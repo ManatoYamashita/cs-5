@@ -1,5 +1,7 @@
 # Computer Simulations 5 - レポート
 
+![cs-5](https://github.com/user-attachments/assets/8d360583-5164-4ad7-9f21-42b6dba5c9b7)
+
 2025/06/30
 g2172117 山下マナト
 
