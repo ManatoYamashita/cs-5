@@ -10,7 +10,6 @@ import weka.core.converters.ConverterUtils.DataSource;
 import weka.classifiers.lazy.IBk;
 import weka.classifiers.Evaluation;
 import weka.core.EuclideanDistance;
-import weka.core.ManhattanDistance;
 
 
 
@@ -22,7 +21,7 @@ public class KNN {
 
     public static void main(String[] args) {
             try {
-            // データセットの読み込み
+            // データセットの読み込み（breast-cancer.arffを使用）
             DataSource source = new DataSource("breast-cancer.arff");
             Instances data = source.getDataSet();
             
@@ -30,32 +29,23 @@ public class KNN {
             if (data.classIndex() == -1)
                 data.setClassIndex(data.numAttributes() - 1);
             
-                        int numClasses = data.numClasses();
-            System.out.println("Number of classes: " + numClasses);
-
-            // クラスの名前を取得して表示
-            for (int i = 0; i < numClasses; i++) {
-                String className = data.classAttribute().value(i);
-                System.out.println("Class " + (i + 1) + ": " + className);
-            }
-
-            // kNNモデルの作成
-            IBk knn = new IBk();
-            knn.setKNN(5);  // kの値を設定（ここでは3）
-            System.out.println("設定したkの値：" + knn.getKNN());
+            System.out.println("=== k-NN 分類器（breast-cancer.arff） ===");
             
-            // 距離関数の設定（例: Euclidean Distance）
+            // k=3（最適値）を使用
+            IBk knn = new IBk();
+            knn.setKNN(3);
+            
+            // 距離関数の設定（Euclidean Distance）
             EuclideanDistance distanceFunction = new EuclideanDistance();
-            // ManhattanDistance distanceFunction = new ManhattanDistance();
             distanceFunction.setInstances(data);
             knn.getNearestNeighbourSearchAlgorithm().setDistanceFunction(distanceFunction);
 
-            // モデルの評価
+            // モデルの評価（10分割交差検定）
             Evaluation eval = new Evaluation(data);
             eval.crossValidateModel(knn, data, 10, new java.util.Random(1));
             
             // 結果の表示
-            System.out.println(eval.toSummaryString("\nResults\n======\n", false)); // その他の結果を出力．
+            System.out.println(eval.toSummaryString("\nResults\n======\n", false));
             System.out.println(eval.toClassDetailsString());
             System.out.println(eval.toMatrixString());
 
