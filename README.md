@@ -1,5 +1,8 @@
 # Computer Simulations 5 - TCU Informatics
 
+![cs-5](https://github.com/user-attachments/assets/c81ac01b-9855-4d41-9c74-3e6597c0fb45)
+
+
 このプロジェクトは東京都市大学 メディア情報学部 情報システム学科のコンピュータシミュレーションの第5回の課題です。
 
 ## 課題内容
